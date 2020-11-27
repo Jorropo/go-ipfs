@@ -51,12 +51,7 @@ func makeAddrsFactory(announce []string, noAnnounce []string) (p2pbhost.AddrsFac
 	}
 
 	return func(allAddrs []ma.Multiaddr) []ma.Multiaddr {
-		var addrs []ma.Multiaddr
-		if len(annAddrs) > 0 {
-			addrs = annAddrs
-		} else {
-			addrs = allAddrs
-		}
+		addrs := append(allAddrs, annAddrs...)
 
 		var out []ma.Multiaddr
 		for _, maddr := range addrs {
